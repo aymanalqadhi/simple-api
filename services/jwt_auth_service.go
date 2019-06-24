@@ -39,7 +39,7 @@ func (auth *JwtAuthService) Authenticate(username string, password string) (stri
 	claims := tokenGen.Claims.(jwt.MapClaims)
 
 	claims["authorized"] = true
-	claims["expires"] = time.Now().Add(time.Hour * 24).Unix()
+	claims["expires"] = time.Now().Add(time.Hour * time.Duration(24*user.AuthDays)).Unix()
 
 	for _, claim := range CalimsByLevel[user.AuthLevel] {
 		claims[claim] = true
