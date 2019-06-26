@@ -43,10 +43,12 @@ func ConfigureRoutes(router *mux.Router) bool {
 	return true
 }
 
+// ConfigureFastRouter configures the fasthttp router
 func ConfigureFastRouter(router *fasthttprouter.Router) bool {
 	return true
 }
 
+// ConfigureFastRoutes configures the fasthttp routes
 func ConfigureFastRoutes(router *fasthttprouter.Router) bool {
 	// Get app routes
 	routeGroups := [][]routes.FastHTTPRoute{
