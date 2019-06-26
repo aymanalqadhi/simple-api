@@ -66,6 +66,10 @@ func ConfigureFastRoutes(router *fasthttprouter.Router) bool {
 		for _, route := range routeGroup {
 			log.Printf("Adding route %q...", route.Pattern)
 
+			if route.NeedsAuth {
+				route.Handler = services.Services.AuthService.AuthorizedFastHandler(route.Handler)
+			}
+
 			regFastRoute(router.GET, route, route.UsesGet)
 			regFastRoute(router.POST, route, route.UsesPost)
 			regFastRoute(router.DELETE, route, route.UsesDelete)
