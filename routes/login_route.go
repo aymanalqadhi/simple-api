@@ -7,7 +7,7 @@ import (
 	"github.com/xSHAD0Wx/simple-api/services"
 )
 
-func fastLoginRoute(ctx *fasthttp.RequestCtx) {
+func loginRoute(ctx *fasthttp.RequestCtx) {
 	if !ctx.PostArgs().Has("username") || !ctx.PostArgs().Has("password") {
 		ctx.Error("Username and password are required", fasthttp.StatusBadRequest)
 		return
@@ -30,7 +30,7 @@ func fastLoginRoute(ctx *fasthttp.RequestCtx) {
 	fmt.Fprint(ctx, token)
 }
 
-func fastRegisterRoute(ctx *fasthttp.RequestCtx) {
+func registerRoute(ctx *fasthttp.RequestCtx) {
 	if !ctx.PostArgs().Has("username") || !ctx.PostArgs().Has("password") {
 		ctx.Error("Username and password are required", fasthttp.StatusBadRequest)
 		return
@@ -52,18 +52,18 @@ func fastRegisterRoute(ctx *fasthttp.RequestCtx) {
 	}
 }
 
-// GetFastLoginRouteGroup Gets the fasthttp routes descriptions of the login routes
-func GetFastLoginRouteGroup() []FastHTTPRoute {
+// GetLoginRouteGroup Gets the fasthttp routes descriptions of the login routes
+func GetLoginRouteGroup() []FastHTTPRoute {
 	return []FastHTTPRoute{
 		FastHTTPRoute{
 			Pattern:  "/login",
 			UsesPost: true,
-			Handler:  fastLoginRoute,
+			Handler:  loginRoute,
 		},
 		FastHTTPRoute{
 			Pattern:  "/register",
 			UsesPost: true,
-			Handler:  fastRegisterRoute,
+			Handler:  registerRoute,
 		},
 	}
 }

@@ -6,16 +6,16 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-func fastPingRoute(ctx *fasthttp.RequestCtx) {
+func pingRoute(ctx *fasthttp.RequestCtx) {
 	fmt.Fprint(ctx, "This site wont go down :D!\n")
 }
 
-// GetFastPingRouteGroup Gets the fasthttp routes describtions of the ping routes
-func GetFastPingRouteGroup() []FastHTTPRoute {
+// GetPingRouteGroup Gets the routes describtions of the ping routes
+func GetPingRouteGroup() []FastHTTPRoute {
 	return []FastHTTPRoute{
 		FastHTTPRoute{
 			Pattern: "/ping",
-			Handler: fastPingRoute,
+			Handler: pingRoute,
 			UsesGet: true,
 		},
 	}

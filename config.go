@@ -21,9 +21,9 @@ func ConfigureFastRouter(router *fasthttprouter.Router) bool {
 func ConfigureFastRoutes(router *fasthttprouter.Router) bool {
 	// Get app routes
 	routeGroups := [][]routes.FastHTTPRoute{
-		routes.GetFastPingRouteGroup(),
-		routes.GetFastLoginRouteGroup(),
-		routes.GetFastClientsRouteGroup(),
+		routes.GetPingRouteGroup(),
+		routes.GetLoginRouteGroup(),
+		routes.GetClientsRouteGroup(),
 	}
 
 	regFastRoute := func(reg func(string, fasthttp.RequestHandler), route routes.FastHTTPRoute, value bool) {

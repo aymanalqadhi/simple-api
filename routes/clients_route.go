@@ -13,7 +13,7 @@ import (
 	"github.com/xSHAD0Wx/simple-api/services"
 )
 
-func fastGetClientsRoute(ctx *fasthttp.RequestCtx) {
+func getClientsRoute(ctx *fasthttp.RequestCtx) {
 	clients, err := services.Services.ClientsRepo.GetAll()
 
 	if err != nil {
@@ -26,7 +26,7 @@ func fastGetClientsRoute(ctx *fasthttp.RequestCtx) {
 	json.NewEncoder(ctx).Encode(clients)
 }
 
-func fastAddClientRoute(ctx *fasthttp.RequestCtx) {
+func addClientRoute(ctx *fasthttp.RequestCtx) {
 	var client models.Client
 	err := json.Unmarshal(ctx.PostBody(), &client)
 
@@ -48,7 +48,7 @@ func fastAddClientRoute(ctx *fasthttp.RequestCtx) {
 	}
 }
 
-func fastDeleteClientRoute(ctx *fasthttp.RequestCtx) {
+func deleteClientRoute(ctx *fasthttp.RequestCtx) {
 
 	id, err := strconv.ParseUint(ctx.UserValue("id").(string), 10, 0)
 	if err != nil {
@@ -66,24 +66,24 @@ func fastDeleteClientRoute(ctx *fasthttp.RequestCtx) {
 	}
 }
 
-// GetFastClientsRouteGroup Gets the fasthttp routes descriptions of the clients routes
-func GetFastClientsRouteGroup() []FastHTTPRoute {
+// GetClientsRouteGroup Gets the routes descriptions of the clients routes
+func GetClientsRouteGroup() []FastHTTPRoute {
 	return []FastHTTPRoute{
 		FastHTTPRoute{
 			Pattern:   "/clients",
-			Handler:   fastGetClientsRoute,
+			Handler:   getClientsRoute,
 			UsesGet:   true,
 			NeedsAuth: true,
 		},
 		FastHTTPRoute{
 			Pattern:   "/clients",
-			Handler:   fastAddClientRoute,
+			Handler:   addClientRoute,
 			UsesPost:  true,
 			NeedsAuth: true,
 		},
 		FastHTTPRoute{
 			Pattern:    "/clients/:id",
-			Handler:    fastDeleteClientRoute,
+			Handler:    deleteClientRoute,
 			UsesDelete: true,
 			NeedsAuth:  true,
 		},
