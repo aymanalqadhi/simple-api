@@ -54,11 +54,6 @@ func (auth *JwtAuthService) Authenticate(username string, password string) (stri
 	return token, nil
 }
 
-// ValidateToken validates a Jwt Token
-func (auth *JwtAuthService) ValidateToken(string) error {
-	return nil
-}
-
 // AuthorizedFastHandler returns a  fasthttp version that requires authorization of simple handler
 func (auth *JwtAuthService) AuthorizedFastHandler(h fasthttp.RequestHandler) fasthttp.RequestHandler {
 	return fasthttp.RequestHandler(func(ctx *fasthttp.RequestCtx) {
