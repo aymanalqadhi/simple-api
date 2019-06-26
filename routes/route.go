@@ -1,6 +1,10 @@
 package routes
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/valyala/fasthttp"
+)
 
 const (
 	// HTTPGet holds the Http GET method string
@@ -19,4 +23,16 @@ type HTTPRoute struct {
 	Methods   []string
 	Handler   func(http.ResponseWriter, *http.Request)
 	NeedsAuth bool
+}
+
+// FastHTTPRoute is a route type to work with fasthttp framework
+type FastHTTPRoute struct {
+	Pattern   string
+	Handler   func(*fasthttp.RequestCtx)
+	NeedsAuth bool
+
+	UsesGet    bool
+	UsesPost   bool
+	UsesDelete bool
+	UsesPut    bool
 }
