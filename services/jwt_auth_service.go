@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/valyala/fasthttp"
+
 	"github.com/xSHAD0Wx/simple-api/shared"
 
 	"github.com/dgrijalva/jwt-go"
@@ -74,6 +76,26 @@ func (auth *JwtAuthService) AuthorizedHandler(h func(http.ResponseWriter, *http.
 
 		} else {
 			res.WriteHeader(http.StatusUnauthorized)
+		}
+	})
+}
+
+// AuthorizedFastHandler returns a  fasthttp version that requires authorization of simple handler
+func (auth *JwtAuthService) AuthorizedFastHandler(h fasthttp.RequestHandler) fasthttp.RequestHandler {
+	return fasthttp.RequestHandler(func(ctx *fasthttp.RequestCtx) {
+		if ctx.Request.Header.Peek("Authorization") != nil {
+			token, err := jwt.Parse(string(ctx.Request.Header.Peek("Authorization")), func(*jwt.Token) (interface{}, error) {
+				return []byte(shared.AuthPassword), nil
+			})
+
+			if err != nil || !token.Valid {
+				ctx.Response.SetStatusCode(fasthttp.StatusUnauthorized)
+			} else {
+				h(ctx)
+			}
+
+		} else {
+			ctx.Response.SetStatusCode(fasthttp.StatusUnauthorized)
 		}
 	})
 }
