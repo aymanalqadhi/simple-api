@@ -53,14 +53,14 @@ func registerRoute(ctx *fasthttp.RequestCtx) {
 }
 
 // GetLoginRouteGroup Gets the fasthttp routes descriptions of the login routes
-func GetLoginRouteGroup() []FastHTTPRoute {
-	return []FastHTTPRoute{
-		FastHTTPRoute{
+func GetLoginRouteGroup() []HTTPRoute {
+	return []HTTPRoute{
+		HTTPRoute{
 			Pattern:  "/login",
 			UsesPost: true,
 			Handler:  loginRoute,
 		},
-		FastHTTPRoute{
+		HTTPRoute{
 			Pattern:  "/register",
 			UsesPost: true,
 			Handler:  registerRoute,

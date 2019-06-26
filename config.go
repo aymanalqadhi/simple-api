@@ -3,13 +3,10 @@ package main
 import (
 	"log"
 
-	"github.com/valyala/fasthttp"
-
 	"github.com/buaazp/fasthttprouter"
-
-	"github.com/xSHAD0Wx/simple-api/services"
-
+	"github.com/valyala/fasthttp"
 	"github.com/xSHAD0Wx/simple-api/routes"
+	"github.com/xSHAD0Wx/simple-api/services"
 )
 
 // ConfigureFastRouter configures the fasthttp router
@@ -20,13 +17,13 @@ func ConfigureFastRouter(router *fasthttprouter.Router) bool {
 // ConfigureFastRoutes configures the fasthttp routes
 func ConfigureFastRoutes(router *fasthttprouter.Router) bool {
 	// Get app routes
-	routeGroups := [][]routes.FastHTTPRoute{
+	routeGroups := [][]routes.HTTPRoute{
 		routes.GetPingRouteGroup(),
 		routes.GetLoginRouteGroup(),
 		routes.GetClientsRouteGroup(),
 	}
 
-	regFastRoute := func(reg func(string, fasthttp.RequestHandler), route routes.FastHTTPRoute, value bool) {
+	regFastRoute := func(reg func(string, fasthttp.RequestHandler), route routes.HTTPRoute, value bool) {
 		if value {
 			reg(route.Pattern, route.Handler)
 		}

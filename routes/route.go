@@ -1,8 +1,6 @@
 package routes
 
 import (
-	"net/http"
-
 	"github.com/valyala/fasthttp"
 )
 
@@ -17,16 +15,8 @@ const (
 	HTTPPut = "PUT"
 )
 
-// HTTPRoute is a struct to represent an HTTP route
-type HTTPRoute struct {
-	Pattern   string
-	Methods   []string
-	Handler   func(http.ResponseWriter, *http.Request)
-	NeedsAuth bool
-}
-
 // FastHTTPRoute is a route type to work with fasthttp framework
-type FastHTTPRoute struct {
+type HTTPRoute struct {
 	Pattern   string
 	Handler   func(*fasthttp.RequestCtx)
 	NeedsAuth bool

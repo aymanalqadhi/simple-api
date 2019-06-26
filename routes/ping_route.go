@@ -11,9 +11,9 @@ func pingRoute(ctx *fasthttp.RequestCtx) {
 }
 
 // GetPingRouteGroup Gets the routes describtions of the ping routes
-func GetPingRouteGroup() []FastHTTPRoute {
-	return []FastHTTPRoute{
-		FastHTTPRoute{
+func GetPingRouteGroup() []HTTPRoute {
+	return []HTTPRoute{
+		HTTPRoute{
 			Pattern: "/ping",
 			Handler: pingRoute,
 			UsesGet: true,

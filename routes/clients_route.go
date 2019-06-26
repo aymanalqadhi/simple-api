@@ -67,21 +67,21 @@ func deleteClientRoute(ctx *fasthttp.RequestCtx) {
 }
 
 // GetClientsRouteGroup Gets the routes descriptions of the clients routes
-func GetClientsRouteGroup() []FastHTTPRoute {
-	return []FastHTTPRoute{
-		FastHTTPRoute{
+func GetClientsRouteGroup() []HTTPRoute {
+	return []HTTPRoute{
+		HTTPRoute{
 			Pattern:   "/clients",
 			Handler:   getClientsRoute,
 			UsesGet:   true,
 			NeedsAuth: true,
 		},
-		FastHTTPRoute{
+		HTTPRoute{
 			Pattern:   "/clients",
 			Handler:   addClientRoute,
 			UsesPost:  true,
 			NeedsAuth: true,
 		},
-		FastHTTPRoute{
+		HTTPRoute{
 			Pattern:    "/clients/:id",
 			Handler:    deleteClientRoute,
 			UsesDelete: true,
