@@ -12,5 +12,5 @@ type User struct {
 	Email     string `gorm:"column:email;unique;not null" json:"email"`
 	Password  string `gorm:"column:password;not null" json:"address"`
 	AuthLevel uint   `gorm:"column:auth_level; default:2" json:"auth_level"`
-	AuthDays  int    `gorm:"column:auth_days; default:2" json:"auth_days"`
+	AuthDays  int    `gorm:"column:auth_days; default:3" json:"auth_days"`
 }
