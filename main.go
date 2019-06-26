@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"time"
+
+	"github.com/valyala/fasthttp"
+
+	"github.com/buaazp/fasthttprouter"
 
 	"github.com/xSHAD0Wx/simple-api/services"
 	"github.com/xSHAD0Wx/simple-api/shared"
-
-	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -19,20 +20,20 @@ func main() {
 	log.Printf("Started server on: %s\n", time.Now())
 
 	// Create a new router
-	mainRouter := mux.NewRouter()
+	mainRouter := fasthttprouter.New()
 
 	// Configure app routes
 	log.Printf("Configuring router...")
-	if !ConfigureRouter(mainRouter) {
+	if !ConfigureFastRouter(mainRouter) {
 		return
 	}
 
 	log.Printf("Configuring routes...")
-	if !ConfigureRoutes(mainRouter) {
+	if !ConfigureFastRoutes(mainRouter) {
 		return
 	}
 
 	// Start the server
 	log.Printf("Starting server on: localhost:%d", shared.ListenPort)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", shared.ListenPort), mainRouter))
+	log.Fatal(fasthttp.ListenAndServe(fmt.Sprintf(":%d", shared.ListenPort), mainRouter.Handler))
 }
