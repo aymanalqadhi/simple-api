@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+
 	"github.com/xSHAD0Wx/simple-api/models"
 	"github.com/xSHAD0Wx/simple-api/repos"
 	"github.com/xSHAD0Wx/simple-api/shared"

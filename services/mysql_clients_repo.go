@@ -2,9 +2,6 @@ package services
 
 import (
 	"errors"
-
-	_ "github.com/go-sql-driver/mysql"
-
 	"github.com/xSHAD0Wx/simple-api/models"
 )
 
