@@ -4,7 +4,6 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
-	"net/http"
 	"time"
 
 	"github.com/valyala/fasthttp"
@@ -58,26 +57,6 @@ func (auth *JwtAuthService) Authenticate(username string, password string) (stri
 // ValidateToken validates a Jwt Token
 func (auth *JwtAuthService) ValidateToken(string) error {
 	return nil
-}
-
-// AuthorizedHandler returns a version that requires authorization of simple handler
-func (auth *JwtAuthService) AuthorizedHandler(h func(http.ResponseWriter, *http.Request)) http.Handler {
-	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-		if req.Header["Authorization"] != nil {
-			token, err := jwt.Parse(req.Header["Authorization"][0], func(*jwt.Token) (interface{}, error) {
-				return []byte(shared.AuthPassword), nil
-			})
-
-			if err != nil || !token.Valid {
-				res.WriteHeader(http.StatusUnauthorized)
-			} else {
-				h(res, req)
-			}
-
-		} else {
-			res.WriteHeader(http.StatusUnauthorized)
-		}
-	})
 }
 
 // AuthorizedFastHandler returns a  fasthttp version that requires authorization of simple handler
